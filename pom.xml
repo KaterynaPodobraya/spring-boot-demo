@@ -110,6 +110,14 @@
             <scope>test</scope>
         </dependency>
 
+        <dependency>
+            <groupId>com.playtika.testcontainers</groupId>
+            <artifactId>embedded-kafka</artifactId>
+            <!-- https://mvnrepository.com/artifact/com.playtika.testcontainers/ -->
+            <version>2.0.7</version>
+            <scope>test</scope>
+        </dependency>
+
     </dependencies>
 
     <build>
