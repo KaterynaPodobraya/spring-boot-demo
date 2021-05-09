@@ -2,15 +2,11 @@ package com.example.springbootdemo;
 
 import com.example.springbootdemo.kafka.Consumer;
 import com.example.springbootdemo.kafka.Producer;
-import org.assertj.core.api.Assertions;
-import org.awaitility.Awaitility;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.kafka.annotation.EnableKafka;
 import org.springframework.kafka.test.context.EmbeddedKafka;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ActiveProfiles;
@@ -19,7 +15,6 @@ import java.util.concurrent.TimeUnit;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.awaitility.Awaitility.await;
-import static org.springframework.test.annotation.DirtiesContext.MethodMode.BEFORE_METHOD;
 
 //@EnableKafka
 //@DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_CLASS)
@@ -37,12 +32,12 @@ class KafkaIntegrationTest {
 	@Autowired
 	Consumer consumer;
 
-	@BeforeAll
+	@BeforeEach
 	public void start(){
 		System.out.println("BEFORE TEST !!!!!");
 	}
 
-	@AfterAll
+	@AfterEach
 	public void finish(){
 		System.out.println("AFTER TEST !!!!!");
 	}
