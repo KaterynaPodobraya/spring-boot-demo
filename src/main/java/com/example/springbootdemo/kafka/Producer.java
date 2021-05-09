@@ -22,9 +22,9 @@ public class Producer {
 
     public void sendMessage(String message) throws InterruptedException, ExecutionException {
         log.info(String.format("Producing message: %s", message));
-        ListenableFuture<SendResult<String, String>> future = this.kafkaTemplate.send(TOPIC, message);
+        ListenableFuture<SendResult<String, String>> future = kafkaTemplate.send(TOPIC, message);
         final SendResult<String, String> stringStringSendResult = future.get();
-        System.out.println(stringStringSendResult + " !!!!!!!!!");
+        log.info(String.format("RESULT : %s", stringStringSendResult));
 
     }
 

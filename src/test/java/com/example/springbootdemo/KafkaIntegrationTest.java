@@ -41,7 +41,7 @@ class KafkaIntegrationTest {
 
 	@Test
 	void sendKafkaMessage() throws InterruptedException, ExecutionException {
-		Thread.sleep(10000);
+		Thread.sleep(10000); // does not work locally
 		producer.sendMessage("KATYA");
 		await().pollInterval(1, TimeUnit.SECONDS)
 			   .timeout(30, TimeUnit.SECONDS)
