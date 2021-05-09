@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.concurrent.ExecutionException;
+
 @Log4j2
 @RestController
 public class KafkaControllers {
@@ -17,7 +19,7 @@ public class KafkaControllers {
     public Producer producer;
 
     @PostMapping(path = "/sendToy")
-    public void sendToyToKafka(){
+    public void sendToyToKafka() throws ExecutionException, InterruptedException {
         Toy toy = new Toy("Kot", "Multicolor", "middle", 6);
         producer.sendMessage(toy.toString());
     }

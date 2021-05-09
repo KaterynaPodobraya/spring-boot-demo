@@ -11,15 +11,12 @@ import org.springframework.kafka.test.context.EmbeddedKafka;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ActiveProfiles;
 
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.awaitility.Awaitility.await;
 
-//@EnableKafka
-//@DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_CLASS)
-@DirtiesContext
-//@EmbeddedKafka(partitions = 1, brokerProperties = { "listeners=PLAINTEXT://localhost:9092", "port=9092" })
 @EmbeddedKafka(partitions = 1, topics={"${embedded.kafka.topicsToCreate}"},
 		bootstrapServersProperty = "${spring.kafka.bootstrap-servers}" )
 @ActiveProfiles("test")
@@ -43,10 +40,11 @@ class KafkaIntegrationTest {
 	}
 
 	@Test
-	void sendKafkaMessage() {
+	void sendKafkaMessage() throws InterruptedException, ExecutionException {
+		Thread.sleep(10000);
 		producer.sendMessage("KATYA");
 		await().pollInterval(1, TimeUnit.SECONDS)
-			   .timeout(10, TimeUnit.SECONDS)
+			   .timeout(30, TimeUnit.SECONDS)
 			   .untilAsserted(() -> assertThat(consumer.getCounter()).isEqualTo(1));
 	}
 
