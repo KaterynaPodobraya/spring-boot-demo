@@ -18,6 +18,6 @@ public class Producer {
 
     @Bean
     public NewTopic createTopic(){
-        return new NewTopic(TOPIC,3,(short) 1);
+        return new NewTopic(TOPIC,1,(short) 1);
     }
 }
